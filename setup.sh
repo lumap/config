@@ -11,19 +11,24 @@ sudo -v;
 echo "Installing Xcode Command Line Tools..."
 xcode-select --install;
 
+# install brew
+echo "Installing Homebrew...";
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Set zshrc
 echo "Setting zshrc..."
 cp ./zshrc ~/.zshrc;
 source ~/.zshrc;
 
-# install brew
-echo "Installing Homebrew...";
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
-source ~/.zshrc;
-
 # Google Cloud SDK
 echo "Installing Google Cloud SDK..."
 brew install --cask google-cloud-sdk;
+echo "
+# gcloud
+source \"$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc\"
+source \"$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc\"
+" >> ~/.zshrc;
 
 # Ruby/Rails
 echo "Installing Ruby and Rails..."
@@ -57,3 +62,6 @@ osascript <<EOD
     end tell
 EOD
 killall Dock;
+
+# Done
+echo "Done! Feel free to erase this folder.";
