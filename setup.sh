@@ -11,9 +11,15 @@ sudo -v;
 echo "Installing Xcode Command Line Tools..."
 xcode-select --install;
 
+# Set zshrc
+echo "Setting zshrc..."
+cp ./zshrc ~/.zshrc;
+source ~/.zshrc;
+
 # install brew
 echo "Installing Homebrew...";
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)";
+source ~/.zshrc;
 
 # Google Cloud SDK
 echo "Installing Google Cloud SDK..."
@@ -22,17 +28,14 @@ brew install --cask google-cloud-sdk;
 # Ruby/Rails
 echo "Installing Ruby and Rails..."
 brew install ruby;
+source ~/.zshrc;
 gem install rails;
 
 # Node.js
 echo "Installing Node.js..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install node --lts;
-
-# Set zshrc
-echo "Setting zshrc..."
-cp ./zshrc ~/.zshrc;
 source ~/.zshrc;
+nvm install node --lts;
 
 # Clear dock
 defaults write com.apple.dock persistent-apps -array;
